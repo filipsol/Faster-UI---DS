@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ComponentProps } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
@@ -72,12 +72,6 @@ function DialogDemo(
   }
 ) {
   const [open, setOpen] = useState(args.open ?? false);
-
-  useEffect(() => {
-    if (args.open !== undefined) {
-      setOpen(args.open);
-    }
-  }, [args.open]);
 
   const handleClose = () => {
     setOpen(false);
