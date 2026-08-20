@@ -56,6 +56,16 @@ const meta = {
       description: "Hides the top-right X dismissal button.",
       table: { defaultValue: { summary: "false" } },
     },
+    scrollable: {
+      control: "boolean",
+      description: "Constrains the dialog height and scrolls only the body, keeping header/footer fixed.",
+      table: { defaultValue: { summary: "false" } },
+    },
+    divider: {
+      control: "boolean",
+      description: "Renders a horizontal divider between the header (title/description) and the body content.",
+      table: { defaultValue: { summary: "false" } },
+    },
   },
   parameters: {
     layout: "centered",
@@ -309,51 +319,65 @@ export const InfoAlert: Story = {
   },
 };
 
-export const LongScrollableContent: Story = {
+export const ScrollableLongDocument: Story = {
+  render: () => {
+    function Demo() {
+      const [open, setOpen] = useState(false);
+      const paragraphs = Array.from({ length: 30 }, (_, i) => i + 1);
+      return (
+        <>
+          <Button variant="outline" onClick={() => setOpen(true)}>
+            Read Full Agreement
+          </Button>
+          <Dialog
+            open={open}
+            onClose={() => setOpen(false)}
+            size="lg"
+            scrollable
+            title="Master Service Agreement"
+            description="Header and footer stay fixed while the body scrolls independently."
+            okText="I Agree"
+            cancelText="Decline"
+          >
+            <div className="flex flex-col gap-3 pr-2">
+              {paragraphs.map((n) => (
+                <p key={n}>
+                  <strong>Section {n}.</strong> This clause outlines term {n} of the agreement,
+                  provided here purely to demonstrate scrolling behavior for long documents inside
+                  a fixed-height modal container.
+                </p>
+              ))}
+            </div>
+          </Dialog>
+        </>
+      );
+    }
+    return <Demo />;
+  },
+};
+
+export const WithDivider: Story = {
   render: () => {
     function Demo() {
       const [open, setOpen] = useState(false);
       return (
         <>
           <Button variant="outline" onClick={() => setOpen(true)}>
-            Terms & Conditions
+            Update Billing Details
           </Button>
           <Dialog
             open={open}
             onClose={() => setOpen(false)}
-            size="lg"
-            title="Terms of Service"
-            description="Please review our terms of service before continuing."
-            footer={
-              <>
-                <Button variant="outline" onClick={() => setOpen(false)}>
-                  Decline
-                </Button>
-                <Button variant="primary" onClick={() => setOpen(false)}>
-                  Accept & Continue
-                </Button>
-              </>
-            }
+            divider
+            title="Update Billing Details"
+            description="Changes apply to your next invoice cycle."
+            okText="Save Changes"
+            cancelText="Cancel"
           >
-            <div className="flex max-h-60 flex-col gap-3 overflow-y-auto pr-2 text-sm text-text">
-              <p>
-                <strong>1. Scope of Service:</strong> Faster UI provides standardized component
-                primitives and token architectures for multi-platform web applications.
-              </p>
-              <p>
-                <strong>2. Accessibility Requirements:</strong> All components are engineered to
-                satisfy WCAG 2.1 AA criteria, including keyboard focus loops, ARIA attributes, and
-                color contrast bounds.
-              </p>
-              <p>
-                <strong>3. Design Tokens:</strong> Semantic tokens must not be bypassed with raw
-                inline hex color overrides.
-              </p>
-              <p>
-                <strong>4. Distribution:</strong> The library is packaged for both CommonJS and
-                ECMAScript Modules with bundled TypeScript declarations.
-              </p>
-            </div>
+            <p className="text-sm text-text">
+              The divider separates the title/description header from the body content, useful
+              for forms and denser information layouts.
+            </p>
           </Dialog>
         </>
       );

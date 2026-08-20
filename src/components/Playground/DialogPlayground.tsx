@@ -33,6 +33,8 @@ export function DialogPlayground() {
   const [closeOnOverlayClick, setCloseOnOverlayClick] = useState(true);
   const [closeOnEsc, setCloseOnEsc] = useState(true);
   const [hideCloseButton, setHideCloseButton] = useState(false);
+  const [scrollable, setScrollable] = useState(false);
+  const [divider, setDivider] = useState(false);
   const [copied, setCopied] = useState(false);
 
   // Figma Types Gallery State
@@ -42,6 +44,7 @@ export function DialogPlayground() {
   const [formOpen, setFormOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
   const [sizeModal, setSizeModal] = useState<DialogSize | null>(null);
+  const [dividerOpen, setDividerOpen] = useState(false);
 
   // Form states in modal
   const [inviteName, setInviteName] = useState("");
@@ -51,7 +54,7 @@ export function DialogPlayground() {
   open={open}
   onClose={() => setOpen(false)}${type !== "default" ? `\n  type="${type}"` : ""}${align !== "left" ? `\n  align="${align}"` : ""}
   title="${title}"${description ? `\n  description="${description}"` : ""}
-  size="${size}"${okText !== "Confirm" ? `\n  okText="${okText}"` : ""}${cancelText !== "Cancel" ? `\n  cancelText="${cancelText}"` : ""}${hideCancelButton ? "\n  hideCancelButton" : ""}${danger ? "\n  danger" : ""}${!closeOnOverlayClick ? "\n  closeOnOverlayClick={false}" : ""}${!closeOnEsc ? "\n  closeOnEsc={false}" : ""}${hideCloseButton ? "\n  hideCloseButton" : ""}
+  size="${size}"${okText !== "Confirm" ? `\n  okText="${okText}"` : ""}${cancelText !== "Cancel" ? `\n  cancelText="${cancelText}"` : ""}${hideCancelButton ? "\n  hideCancelButton" : ""}${danger ? "\n  danger" : ""}${!closeOnOverlayClick ? "\n  closeOnOverlayClick={false}" : ""}${!closeOnEsc ? "\n  closeOnEsc={false}" : ""}${hideCloseButton ? "\n  hideCloseButton" : ""}${scrollable ? "\n  scrollable" : ""}${divider ? "\n  divider" : ""}
 >
   <p className="text-sm text-text">
     This dialog is controlled dynamically by the Storybook props table.
@@ -108,6 +111,8 @@ export function DialogPlayground() {
           closeOnOverlayClick={closeOnOverlayClick}
           closeOnEsc={closeOnEsc}
           hideCloseButton={hideCloseButton}
+          scrollable={scrollable}
+          divider={divider}
         >
           <div className="flex flex-col gap-3 text-sm text-text">
             <p>
@@ -118,6 +123,12 @@ export function DialogPlayground() {
             <p className="text-xs text-text-muted">
               Press Escape or click outside the container to dismiss according to the configured controls.
             </p>
+            {scrollable &&
+              Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
+                <p key={n} className="text-xs text-text-muted">
+                  Extra padding paragraph {n} to demonstrate the inner scroll container while the header and footer stay fixed.
+                </p>
+              ))}
           </div>
         </Dialog>
 
@@ -358,6 +369,38 @@ export function DialogPlayground() {
                     Hides the top-right X dismissal button.
                   </td>
                 </tr>
+
+                <tr>
+                  <td className="px-4 py-2.5 font-semibold text-primary">scrollable</td>
+                  <td className="px-4 py-2.5 text-text-muted">boolean</td>
+                  <td className="px-4 py-2.5 font-sans">
+                    <input
+                      type="checkbox"
+                      checked={scrollable}
+                      onChange={(e) => setScrollable(e.target.checked)}
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-focus-ring cursor-pointer"
+                    />
+                  </td>
+                  <td className="px-4 py-2.5 font-sans text-text-muted">
+                    Constrains dialog height and scrolls only the body, keeping header/footer fixed.
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="px-4 py-2.5 font-semibold text-primary">divider</td>
+                  <td className="px-4 py-2.5 text-text-muted">boolean</td>
+                  <td className="px-4 py-2.5 font-sans">
+                    <input
+                      type="checkbox"
+                      checked={divider}
+                      onChange={(e) => setDivider(e.target.checked)}
+                      className="h-4 w-4 rounded border-border text-primary focus:ring-focus-ring cursor-pointer"
+                    />
+                  </td>
+                  <td className="px-4 py-2.5 font-sans text-text-muted">
+                    Renders a horizontal divider between the header and the body content.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -495,7 +538,7 @@ export function DialogPlayground() {
       <div className="flex flex-col gap-4">
         <h3 className="text-lg font-semibold text-text">Interactive Archetypes</h3>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {/* Destructive */}
           <div className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-5">
             <div className="flex flex-col gap-2">
@@ -541,6 +584,22 @@ export function DialogPlayground() {
             </div>
             <Button variant="outline" size="sm" onClick={() => setTermsOpen(true)}>
               Launch Terms Modal
+            </Button>
+          </div>
+
+          {/* Dialog With Divider */}
+          <div className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-5">
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2 text-text-muted">
+                <Layers className="h-4 w-4" />
+                <span className="text-xs font-bold uppercase">Dialog With Divider</span>
+              </div>
+              <p className="text-xs text-text-muted">
+                Horizontal rule separating the title/description header from the body content.
+              </p>
+            </div>
+            <Button variant="outline" size="sm" onClick={() => setDividerOpen(true)}>
+              Launch Divider Modal
             </Button>
           </div>
         </div>
@@ -727,12 +786,13 @@ export function DialogPlayground() {
         open={termsOpen}
         onClose={() => setTermsOpen(false)}
         size="lg"
+        scrollable
         title="Faster UI Terms of Service"
         description="Please review our terms of use before publishing."
         okText="Accept Terms"
         cancelText="Decline"
       >
-        <div className="flex max-h-60 flex-col gap-3 overflow-y-auto pr-2 text-sm text-text">
+        <div className="flex flex-col gap-3 pr-2 text-sm text-text">
           <p>
             <strong>1. Design Token Integrity:</strong> Components must strictly derive color and
             spacing from CSS custom properties.
@@ -745,6 +805,12 @@ export function DialogPlayground() {
             <strong>3. Bundle Optimization:</strong> Zero runtime styling libraries are bundled into
             production builds.
           </p>
+          {Array.from({ length: 15 }, (_, i) => i + 4).map((n) => (
+            <p key={n}>
+              <strong>{n}. Clause {n}:</strong> Additional term provided to demonstrate the fixed
+              header/footer with an independently scrolling body for long documents.
+            </p>
+          ))}
         </div>
       </Dialog>
 
@@ -761,6 +827,22 @@ export function DialogPlayground() {
         <p className="text-sm text-text">
           This preview confirms that the modal calculates container proportions smoothly across small,
           medium, and large viewports.
+        </p>
+      </Dialog>
+
+      {/* 11. Dialog With Divider */}
+      <Dialog
+        open={dividerOpen}
+        onClose={() => setDividerOpen(false)}
+        divider
+        title="Update Billing Details"
+        description="Changes apply to your next invoice cycle."
+        okText="Save Changes"
+        cancelText="Cancel"
+      >
+        <p className="text-sm text-text">
+          The divider below the header keeps the title/description visually separated from the
+          body content, useful for forms and denser information layouts.
         </p>
       </Dialog>
     </div>

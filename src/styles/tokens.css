@@ -177,7 +177,7 @@
   --color-overlay: var(--color-overlay);
 
   --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
+  --radius-md: var(--radius-sm);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --radius-full: var(--radius-full);

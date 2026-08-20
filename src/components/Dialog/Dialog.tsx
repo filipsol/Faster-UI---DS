@@ -55,6 +55,12 @@ export interface DialogProps {
   closeOnEsc?: boolean;
   /** Hides the built-in close (X) button in the upper corner. @default false */
   hideCloseButton?: boolean;
+  /** Constrains the dialog height and scrolls only the body, keeping header/footer fixed. Useful for long documents. @default false */
+  scrollable?: boolean;
+  /** Maximum viewport height of the dialog panel when `scrollable` is set. @default '85vh' */
+  maxHeight?: string;
+  /** Renders a horizontal divider between the header (title/description) and the body content. @default false */
+  divider?: boolean;
   className?: string;
 }
 
@@ -98,6 +104,9 @@ export function Dialog({
   closeOnOverlayClick = true,
   closeOnEsc = true,
   hideCloseButton = false,
+  scrollable = false,
+  maxHeight = "50vh",
+  divider = false,
   className,
 }: DialogProps) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -200,9 +209,11 @@ export function Dialog({
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
+        style={scrollable ? { maxHeight } : undefined}
         className={clsx(
           "relative z-10 w-full rounded-xl border border-border bg-background p-6 shadow-overlay outline-none",
           sizeStyles[size],
+          scrollable && "flex flex-col overflow-hidden",
           className
         )}
       >
@@ -220,7 +231,7 @@ export function Dialog({
 
         {/* Centered Layout Header */}
         {isCentered && (
-          <div className="mb-4 flex flex-col items-center text-center">
+          <div className={clsx("mb-4 flex shrink-0 flex-col items-center text-center", scrollable && "pr-6")}>
             {statusIcon && (
               <div
                 className={clsx(
@@ -241,7 +252,7 @@ export function Dialog({
               </h2>
             )}
             {description && (
-              <p id={descriptionId} className="mt-1.5 text-sm text-text-muted">
+              <p id={descriptionId} className="mt-1.5 break-words text-sm text-text-muted">
                 {description}
               </p>
             )}
@@ -250,7 +261,7 @@ export function Dialog({
 
         {/* Left-Aligned Layout Header */}
         {!isCentered && (title || description || statusIcon) && (
-          <div className="mb-4 pr-6">
+          <div className="mb-4 shrink-0 pr-6">
             <div className="flex items-start gap-3">
               {statusIcon && <div className="mt-0.5 shrink-0">{statusIcon}</div>}
               <div className="flex-1">
@@ -260,7 +271,7 @@ export function Dialog({
                   </h2>
                 )}
                 {description && (
-                  <p id={descriptionId} className="mt-1 text-sm text-text-muted">
+                  <p id={descriptionId} className="mt-1 break-words text-sm text-text-muted">
                     {description}
                   </p>
                 )}
@@ -269,12 +280,16 @@ export function Dialog({
           </div>
         )}
 
+        {/* Header/Body Divider */}
+        {divider && <hr className="-mx-6 mb-4 shrink-0 border-border" />}
+
         {/* Body Content */}
         {children && (
           <div
             className={clsx(
               "text-sm text-text",
-              isCentered && "text-center"
+              isCentered && "text-center",
+              scrollable && "min-h-0 flex-1 overflow-y-auto"
             )}
           >
             {children}
@@ -286,7 +301,7 @@ export function Dialog({
           footer && (
             <div
               className={clsx(
-                "mt-6 flex gap-3",
+                "mt-6 flex shrink-0 gap-3",
                 isCentered ? "justify-center" : "justify-end"
               )}
             >
@@ -296,7 +311,7 @@ export function Dialog({
         ) : (
           <div
             className={clsx(
-              "mt-6 flex items-center gap-3",
+              "mt-6 flex shrink-0 items-center gap-3",
               isCentered ? "justify-center" : "justify-end"
             )}
           >
