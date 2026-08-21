@@ -87,9 +87,8 @@ Colors, spacing, typography, radii, and shadow primitives are **never hardcoded 
 - **Accessibility**: Auto-associates label (`htmlFor`), helper text, and error messages via `aria-describedby`; sets `aria-invalid` on errors; error text uses `role="alert"`.
 
 ### Dialog
-- **Figma Alignment**: Fully matches TapTap Design System modal specs.
+- **Figma Alignment**: Matches the TapTap Design System modal specs.
 - **Types**: `info`, `success`, `warning`, `danger`, `primary`.
-- **Alignments**: `left` (icon adjacent to header) and `center` (hero icon with centered content).
 - **Status Badges**: Dedicated circular status icons with subtle tint backgrounds.
 - **Action Buttons**: Configurable `okText`, `cancelText`, `onOk`, `onCancel`, `hideCancelButton`, and `danger`.
 - **Accessibility**: WAI-ARIA compliant modal (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`, `aria-describedby`), automated Tab focus trap, focus restoration to trigger on dismiss, and dismissible via Escape, overlay click, or close button.

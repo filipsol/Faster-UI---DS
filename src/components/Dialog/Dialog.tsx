@@ -12,7 +12,6 @@ import { Button } from "../Button";
 
 export type DialogSize = "sm" | "md" | "lg";
 export type DialogType = "default" | "info" | "success" | "warning" | "error" | "danger";
-export type DialogAlign = "left" | "center";
 
 export interface DialogProps {
   /** Controls whether the dialog is rendered/visible. */
@@ -21,8 +20,6 @@ export interface DialogProps {
   onClose: () => void;
   /** Semantic type of the dialog (default, info, success, warning, error, danger). @default 'default' */
   type?: DialogType;
-  /** Content alignment within the dialog. @default 'left' */
-  align?: DialogAlign;
   /** Custom icon override. When type is set, a matching status icon is displayed automatically unless overridden. */
   icon?: ReactNode;
   /** Accessible title, rendered in the header and wired to aria-labelledby. */
@@ -78,7 +75,6 @@ const FOCUSABLE_SELECTOR =
  *
  * TapTap Design System compliant modal dialog supporting:
  * - Types: default, info, success, warning, error, danger
- * - Alignments: left, center
  * - Sizing: sm (400px), md (480px), lg (640px)
  * - Built-in status iconography and automatic footer generation
  * - Focus trapping, keyboard navigation, and WAI-ARIA modal semantics
@@ -87,7 +83,6 @@ export function Dialog({
   open,
   onClose,
   type = "default",
-  align = "left",
   icon,
   title,
   ariaLabel,
@@ -187,7 +182,6 @@ export function Dialog({
   };
 
   const statusIcon = renderStatusIcon();
-  const isCentered = align === "center";
 
   return createPortal(
     <div
@@ -211,7 +205,7 @@ export function Dialog({
         onKeyDown={handleKeyDown}
         style={scrollable ? { maxHeight } : undefined}
         className={clsx(
-          "relative z-10 w-full rounded-xl border border-border bg-background p-6 shadow-overlay outline-none",
+          "relative z-10 w-full rounded-[4px] border border-border bg-background p-6 shadow-overlay outline-none",
           sizeStyles[size],
           scrollable && "flex flex-col overflow-hidden",
           className
@@ -229,38 +223,8 @@ export function Dialog({
           </button>
         )}
 
-        {/* Centered Layout Header */}
-        {isCentered && (
-          <div className={clsx("mb-4 flex shrink-0 flex-col items-center text-center", scrollable && "pr-6")}>
-            {statusIcon && (
-              <div
-                className={clsx(
-                  "mb-3 flex h-12 w-12 items-center justify-center rounded-full",
-                  type === "info" && "bg-blue-500/10",
-                  type === "success" && "bg-primary-subtle",
-                  type === "warning" && "bg-amber-500/10",
-                  (type === "error" || type === "danger") && "bg-danger-subtle",
-                  type === "default" && "bg-disabled-bg"
-                )}
-              >
-                {statusIcon}
-              </div>
-            )}
-            {title && (
-              <h2 id={titleId} className="text-lg font-semibold text-text">
-                {title}
-              </h2>
-            )}
-            {description && (
-              <p id={descriptionId} className="mt-1.5 break-words text-sm text-text-muted">
-                {description}
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Left-Aligned Layout Header */}
-        {!isCentered && (title || description || statusIcon) && (
+        {/* Dialog Header */}
+        {(title || description || statusIcon) && (
           <div className="mb-4 shrink-0 pr-6">
             <div className="flex items-start gap-3">
               {statusIcon && <div className="mt-0.5 shrink-0">{statusIcon}</div>}
@@ -288,7 +252,6 @@ export function Dialog({
           <div
             className={clsx(
               "text-sm text-text",
-              isCentered && "text-center",
               scrollable && "min-h-0 flex-1 overflow-y-auto"
             )}
           >
@@ -302,7 +265,7 @@ export function Dialog({
             <div
               className={clsx(
                 "mt-6 flex shrink-0 gap-3",
-                isCentered ? "justify-center" : "justify-end"
+                "justify-end"
               )}
             >
               {footer}
@@ -312,7 +275,7 @@ export function Dialog({
           <div
             className={clsx(
               "mt-6 flex shrink-0 items-center gap-3",
-              isCentered ? "justify-center" : "justify-end"
+              "justify-end"
             )}
           >
             {!hideCancelButton && (

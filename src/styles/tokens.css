@@ -6,81 +6,184 @@
  */
 
 :root {
-  /* TapTap Brand / Primary (#15C5CE) */
+  /* TapTap Brand / Primary (#15C5CE = Primary 600) */
   --color-primary: #15c5ce;
-  --color-primary-hover: #11afb8;
-  --color-primary-active: #0e8e95;
-  --color-primary-subtle: #e6f9fa;
+  --color-primary-hover: #47cfd6;
+  --color-primary-active: #00abb6;
+  --color-primary-subtle: #eefcfc;
   --color-primary-foreground: #ffffff;
 
-  /* Brand Cyan/Teal Scale */
-  --color-brand-50: #e6f9fa;
-  --color-brand-100: #c2f2f5;
-  --color-brand-200: #93e7ec;
-  --color-brand-300: #5ed6de;
-  --color-brand-400: #32c8d2;
-  --color-brand-500: #15c5ce;
-  --color-brand-600: #11afb8;
-  --color-brand-700: #0e8e95;
-  --color-brand-800: #0b6f75;
-  --color-brand-900: #074e52;
+  /* Primary Scale */
+  --color-primary-50: #f9ffff;
+  --color-primary-100: #eefcfc;
+  --color-primary-200: #dff7f7;
+  --color-primary-300: #b0ebec;
+  --color-primary-400: #7ddde1;
+  --color-primary-500: #47cfd6;
+  --color-primary-600: #15c5ce;
+  --color-primary-700: #00abb6;
 
-  /* Neutral */
+  /* Brand Scale Aliases */
+  --color-brand-50: #f9ffff;
+  --color-brand-100: #eefcfc;
+  --color-brand-200: #dff7f7;
+  --color-brand-300: #b0ebec;
+  --color-brand-400: #7ddde1;
+  --color-brand-500: #15c5ce;
+  --color-brand-600: #00abb6;
+  --color-brand-700: #00abb6;
+  --color-brand-800: #00abb6;
+  --color-brand-900: #00abb6;
+
+  /* Neutral Scale */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #eeeeee;
+  --color-neutral-300: #e1e1e1;
+  --color-neutral-400: #cacaca;
+  --color-neutral-500: #8e8e8e;
+  --color-neutral-600: #4b4b4b;
+  --color-neutral-700: #1f1f1f;
+
+  /* Neutral Semantics */
   --color-background: #ffffff;
-  --color-surface: #f7f8fa;
-  --color-border: #e5e7eb;
-  --color-border-hover: #cbd2d9;
-  --color-text: #1f2329;
-  --color-text-muted: #8f959e;
+  --color-surface: #fafafa;
+  --color-border: #e1e1e1;
+  --color-border-hover: #cacaca;
+  --color-text: #1f1f1f;
+  --color-text-secondary: #4b4b4b;
+  --color-text-muted: #8e8e8e;
 
   /* Disabled state */
-  --color-disabled-bg: #f2f3f5;
-  --color-disabled-text: #bfc4cc;
-  --color-disabled-border: #e5e7eb;
+  --color-disabled-bg: #f5f5f5;
+  --color-disabled-text: #cacaca;
+  --color-disabled-border: #eeeeee;
 
-  /* Danger / Error */
-  --color-danger: #f54a45;
-  --color-danger-hover: #d93636;
-  --color-danger-active: #ba2828;
-  --color-danger-subtle: #feeceb;
-  --color-danger-border: #f54a45;
-  --color-danger-text: #f54a45;
+  /* Auxiliary (Orange) Scale */
+  --color-auxiliary-50: #fffcfc;
+  --color-auxiliary-100: #fff6f3;
+  --color-auxiliary-200: #fff2ee;
+  --color-auxiliary-300: #ffe1d6;
+  --color-auxiliary-400: #ffc8b6;
+  --color-auxiliary-500: #ffa487;
+  --color-auxiliary-600: #ff8156;
+  --color-auxiliary-700: #fe632f;
 
-  /* Success */
-  --color-success: #15c5ce;
-  --color-success-subtle: #e6f9fa;
+  /* Danger / Error Scale & Semantics */
+  --color-danger-50: #fffbfb;
+  --color-danger-100: #fef2f2;
+  --color-danger-200: #ffe8ee;
+  --color-danger-300: #ffccd2;
+  --color-danger-400: #f49898;
+  --color-danger-500: #eb6f70;
+  --color-danger-600: #f64c4c;
+  --color-danger-700: #ec2d30;
 
-  /* Warning */
-  --color-warning: #ff8800;
-  --color-warning-subtle: #fff7e8;
+  --color-danger: #f64c4c;
+  --color-danger-hover: #eb6f70;
+  --color-danger-active: #ec2d30;
+  --color-danger-subtle: #fef2f2;
+  --color-danger-border: #f64c4c;
+  --color-danger-text: #f64c4c;
 
-  /* Info */
-  --color-info: #2f74ff;
-  --color-info-subtle: #edf5ff;
+  /* Success Scale & Semantics */
+  --color-success-50: #f8fefc;
+  --color-success-100: #f2faf6;
+  --color-success-200: #e5f5ec;
+  --color-success-300: #c0e5d1;
+  --color-success-400: #97d4b4;
+  --color-success-500: #6bc497;
+  --color-success-600: #47b881;
+  --color-success-700: #0c9d61;
+
+  --color-success: #47b881;
+  --color-success-subtle: #f2faf6;
+
+  /* Warning Scale & Semantics */
+  --color-warning-50: #fffdfa;
+  --color-warning-100: #fff9ee;
+  --color-warning-200: #fff7e1;
+  --color-warning-300: #ffeab3;
+  --color-warning-400: #ffdd82;
+  --color-warning-500: #ffc62b;
+  --color-warning-600: #ffad0d;
+  --color-warning-700: #fe9b0e;
+
+  --color-warning: #ffad0d;
+  --color-warning-subtle: #fff9ee;
+
+  /* Info Scale & Semantics */
+  --color-info-50: #f8fcff;
+  --color-info-100: #f1f8ff;
+  --color-info-200: #e4f2ff;
+  --color-info-300: #bdddff;
+  --color-info-400: #93c8ff;
+  --color-info-500: #4ba1ff;
+  --color-info-600: #3b82f6;
+  --color-info-700: #3a70e2;
+
+  --color-info: #3b82f6;
+  --color-info-subtle: #f1f8ff;
 
   /* Focus ring */
   --color-focus-ring: #15c5ce;
 
   /* Overlay (Dialog) */
-  --color-overlay: rgb(15 23 42 / 0.5);
+  --color-overlay: rgb(31 31 31 / 0.5);
 
-  /* Radius */
+  /* Radius (TapTap Design System spec) */
+  --radius-none: 0px;
+  --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-full: 9999px;
 
-  /* Typography */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
+  /* Typography (TapTap Design System Style Guide spec) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  --font-mono: Consolas, Menlo, Monaco, "Courier New", monospace;
+  --font-chinese: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  --font-english: "SF UI Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, sans-serif;
+  --font-numbers: "Helvetica Neue", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-code: Consolas, Menlo, Monaco, "Courier New", monospace;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
-  --shadow-overlay: 0 20px 25px -5px rgb(0 0 0 / 0.15),
-    0 8px 10px -6px rgb(0 0 0 / 0.15);
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Type Scale (7 styles: H1 to Caption) */
+  --font-size-h1: 30px;
+  --line-height-h1: 38px;
+
+  --font-size-h2: 24px;
+  --line-height-h2: 32px;
+
+  --font-size-h3: 20px;
+  --line-height-h3: 28px;
+
+  --font-size-title: 18px;
+  --line-height-title: 26px;
+
+  --font-size-subtitle: 16px;
+  --line-height-subtitle: 24px;
+
+  --font-size-body: 14px;
+  --line-height-body: 22px;
+
+  --font-size-caption: 12px;
+  --line-height-caption: 18px;
+
+  /* Shadows / Elevation (TapTap Design System spec) */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 8px 16px -4px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 16px 24px -6px rgb(0 0 0 / 0.12), 0 6px 10px -4px rgb(0 0 0 / 0.06);
+  --shadow-overlay: 0 20px 32px -4px rgb(0 0 0 / 0.16),
+    0 8px 16px -4px rgb(0 0 0 / 0.08);
 }
 
 .dark,
@@ -132,10 +235,13 @@
   /* Overlay (Dialog) */
   --color-overlay: rgba(0, 0, 0, 0.75);
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  /* Shadows (Dark Theme) */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 8px 16px -4px rgb(0 0 0 / 0.6), 0 4px 6px -2px rgb(0 0 0 / 0.4);
+  --shadow-xl: 0 16px 24px -6px rgb(0 0 0 / 0.7), 0 6px 10px -4px rgb(0 0 0 / 0.5);
   --shadow-overlay: 0 25px 50px -12px rgb(0 0 0 / 0.8);
 }
 
@@ -146,11 +252,39 @@
   --color-primary-subtle: var(--color-primary-subtle);
   --color-primary-foreground: var(--color-primary-foreground);
 
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+
+  --color-neutral-50: var(--color-neutral-50);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-200: var(--color-neutral-200);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-400: var(--color-neutral-400);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-600: var(--color-neutral-600);
+  --color-neutral-700: var(--color-neutral-700);
+
+  --color-auxiliary-50: var(--color-auxiliary-50);
+  --color-auxiliary-100: var(--color-auxiliary-100);
+  --color-auxiliary-200: var(--color-auxiliary-200);
+  --color-auxiliary-300: var(--color-auxiliary-300);
+  --color-auxiliary-400: var(--color-auxiliary-400);
+  --color-auxiliary-500: var(--color-auxiliary-500);
+  --color-auxiliary-600: var(--color-auxiliary-600);
+  --color-auxiliary-700: var(--color-auxiliary-700);
+
   --color-background: var(--color-background);
   --color-surface: var(--color-surface);
   --color-border: var(--color-border);
   --color-border-hover: var(--color-border-hover);
   --color-text: var(--color-text);
+  --color-text-secondary: var(--color-text-secondary);
   --color-text-muted: var(--color-text-muted);
 
   --color-disabled-bg: var(--color-disabled-bg);
@@ -164,28 +298,134 @@
   --color-danger-border: var(--color-danger-border);
   --color-danger-text: var(--color-danger-text);
 
+  --color-danger-50: var(--color-danger-50);
+  --color-danger-100: var(--color-danger-100);
+  --color-danger-200: var(--color-danger-200);
+  --color-danger-300: var(--color-danger-300);
+  --color-danger-400: var(--color-danger-400);
+  --color-danger-500: var(--color-danger-500);
+  --color-danger-600: var(--color-danger-600);
+  --color-danger-700: var(--color-danger-700);
+
   --color-success: var(--color-success);
   --color-success-subtle: var(--color-success-subtle);
+
+  --color-success-50: var(--color-success-50);
+  --color-success-100: var(--color-success-100);
+  --color-success-200: var(--color-success-200);
+  --color-success-300: var(--color-success-300);
+  --color-success-400: var(--color-success-400);
+  --color-success-500: var(--color-success-500);
+  --color-success-600: var(--color-success-600);
+  --color-success-700: var(--color-success-700);
 
   --color-warning: var(--color-warning);
   --color-warning-subtle: var(--color-warning-subtle);
 
+  --color-warning-50: var(--color-warning-50);
+  --color-warning-100: var(--color-warning-100);
+  --color-warning-200: var(--color-warning-200);
+  --color-warning-300: var(--color-warning-300);
+  --color-warning-400: var(--color-warning-400);
+  --color-warning-500: var(--color-warning-500);
+  --color-warning-600: var(--color-warning-600);
+  --color-warning-700: var(--color-warning-700);
+
   --color-info: var(--color-info);
   --color-info-subtle: var(--color-info-subtle);
+
+  --color-info-50: var(--color-info-50);
+  --color-info-100: var(--color-info-100);
+  --color-info-200: var(--color-info-200);
+  --color-info-300: var(--color-info-300);
+  --color-info-400: var(--color-info-400);
+  --color-info-500: var(--color-info-500);
+  --color-info-600: var(--color-info-600);
+  --color-info-700: var(--color-info-700);
 
   --color-focus-ring: var(--color-focus-ring);
   --color-overlay: var(--color-overlay);
 
+  --radius-xs: var(--radius-xs);
   --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-sm);
+  --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
   --radius-full: var(--radius-full);
 
   --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-chinese: var(--font-chinese);
+  --font-english: var(--font-english);
+  --font-numbers: var(--font-numbers);
+  --font-code: var(--font-code);
 
+  --shadow-xs: var(--shadow-xs);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
   --shadow-overlay: var(--shadow-overlay);
 }
+
+/* TapTap Design System Typography Helper Classes */
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-chinese {
+  font-family: var(--font-chinese);
+}
+
+.font-english {
+  font-family: var(--font-english);
+}
+
+.font-numbers {
+  font-family: var(--font-numbers);
+}
+
+.font-code {
+  font-family: var(--font-code);
+}
+
+.text-tds-h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+}
+
+.text-tds-h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+
+.text-tds-h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+}
+
+.text-tds-title {
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-title);
+}
+
+.text-tds-subtitle {
+  font-size: var(--font-size-subtitle);
+  line-height: var(--line-height-subtitle);
+}
+
+.text-tds-body {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.text-tds-caption {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+

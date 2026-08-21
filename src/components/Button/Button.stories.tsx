@@ -25,7 +25,7 @@ const meta = {
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
-      description: "Button dimensions (sm: 32px, md: 40px, lg: 48px).",
+      description: "Button dimensions (sm: 24px, md: 36px, lg: 40px).",
       table: { defaultValue: { summary: "md" } },
     },
     isLoading: {

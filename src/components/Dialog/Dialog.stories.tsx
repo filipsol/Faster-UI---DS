@@ -27,12 +27,6 @@ const meta = {
       description: "Semantic type configuring status iconography and color accents.",
       table: { defaultValue: { summary: "default" } },
     },
-    align: {
-      control: "radio",
-      options: ["left", "center"],
-      description: "Alignment of title, description, and status icon.",
-      table: { defaultValue: { summary: "left" } },
-    },
     title: {
       control: "text",
       description: "Dialog header title.",
@@ -169,22 +163,6 @@ export const TypeDangerError: Story = {
       danger
     >
       All design systems, components, and user permissions will be immediately purged from the server.
-    </DialogDemo>
-  ),
-};
-
-export const CenteredConfirmDialog: Story = {
-  render: () => (
-    <DialogDemo
-      type="warning"
-      align="center"
-      size="sm"
-      title="Discard Draft Changes?"
-      description="Are you sure you want to revert to the published token baseline?"
-      okText="Discard"
-      cancelText="Cancel"
-    >
-      Your local changes cannot be recovered once discarded.
     </DialogDemo>
   ),
 };

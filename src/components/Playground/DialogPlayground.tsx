@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dialog } from "../Dialog";
-import type { DialogSize, DialogType, DialogAlign } from "../Dialog";
+import type { DialogSize, DialogType } from "../Dialog";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import {
@@ -22,7 +22,6 @@ export function DialogPlayground() {
   // Configured Interactive Dialog State
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<DialogType>("default");
-  const [align, setAlign] = useState<DialogAlign>("left");
   const [size, setSize] = useState<DialogSize>("md");
   const [title, setTitle] = useState("Confirm Workspace Changes");
   const [description, setDescription] = useState("Review your parameters before committing.");
@@ -39,7 +38,6 @@ export function DialogPlayground() {
 
   // Figma Types Gallery State
   const [activeTypeModal, setActiveTypeModal] = useState<DialogType | null>(null);
-  const [centeredModalOpen, setCenteredModalOpen] = useState(false);
   const [destructiveOpen, setDestructiveOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
@@ -52,7 +50,7 @@ export function DialogPlayground() {
 
   const generatedJsx = `<Dialog
   open={open}
-  onClose={() => setOpen(false)}${type !== "default" ? `\n  type="${type}"` : ""}${align !== "left" ? `\n  align="${align}"` : ""}
+  onClose={() => setOpen(false)}${type !== "default" ? `\n  type="${type}"` : ""}
   title="${title}"${description ? `\n  description="${description}"` : ""}
   size="${size}"${okText !== "Confirm" ? `\n  okText="${okText}"` : ""}${cancelText !== "Cancel" ? `\n  cancelText="${cancelText}"` : ""}${hideCancelButton ? "\n  hideCancelButton" : ""}${danger ? "\n  danger" : ""}${!closeOnOverlayClick ? "\n  closeOnOverlayClick={false}" : ""}${!closeOnEsc ? "\n  closeOnEsc={false}" : ""}${hideCloseButton ? "\n  hideCloseButton" : ""}${scrollable ? "\n  scrollable" : ""}${divider ? "\n  divider" : ""}
 >
@@ -100,7 +98,6 @@ export function DialogPlayground() {
           open={open}
           onClose={() => setOpen(false)}
           type={type}
-          align={align}
           title={title}
           description={description}
           size={size}
@@ -170,40 +167,6 @@ export function DialogPlayground() {
                   </td>
                   <td className="px-4 py-2.5 font-sans text-text-muted">
                     Semantic status type from TapTap Figma spec configuring status icon and theme.
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="px-4 py-2.5 font-semibold text-primary">align</td>
-                  <td className="px-4 py-2.5 text-text-muted">"left" | "center"</td>
-                  <td className="px-4 py-2.5 font-sans">
-                    <div className="flex items-center gap-3">
-                      <label className="flex items-center gap-1.5 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="dialog-align"
-                          value="left"
-                          checked={align === "left"}
-                          onChange={() => setAlign("left")}
-                          className="text-primary focus:ring-focus-ring"
-                        />
-                        <span className="text-xs">Left</span>
-                      </label>
-                      <label className="flex items-center gap-1.5 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="dialog-align"
-                          value="center"
-                          checked={align === "center"}
-                          onChange={() => setAlign("center")}
-                          className="text-primary focus:ring-focus-ring"
-                        />
-                        <span className="text-xs">Center</span>
-                      </label>
-                    </div>
-                  </td>
-                  <td className="px-4 py-2.5 font-sans text-text-muted">
-                    Alignment for header, status icon, body text, and action buttons.
                   </td>
                 </tr>
 
@@ -516,21 +479,6 @@ export function DialogPlayground() {
             </Button>
           </div>
 
-          {/* Center-Aligned Alert */}
-          <div className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface p-5 transition hover:border-primary/50">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-text">
-                <Sparkles className="h-4 w-4 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-wider">Centered Layout</span>
-              </div>
-              <p className="text-xs text-text-muted">
-                Centered status badge icon, centered headlines, and centered action buttons.
-              </p>
-            </div>
-            <Button variant="outline" size="sm" onClick={() => setCenteredModalOpen(true)}>
-              Preview Centered Dialog
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -697,23 +645,6 @@ export function DialogPlayground() {
       >
         <p className="text-sm text-text">
           All associated components, design tokens, and version histories will be immediately and permanently removed.
-        </p>
-      </Dialog>
-
-      {/* 6. Centered Dialog */}
-      <Dialog
-        open={centeredModalOpen}
-        onClose={() => setCenteredModalOpen(false)}
-        type="success"
-        align="center"
-        size="sm"
-        title="Deployment Complete"
-        description="Your Faster UI design system has been successfully compiled and deployed."
-        okText="Got it!"
-        hideCancelButton
-      >
-        <p className="text-sm text-text">
-          All package builds and CSS variables are ready for downstream consumption.
         </p>
       </Dialog>
 

@@ -25,20 +25,20 @@ export interface ButtonProps
 }
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-md font-medium cursor-pointer " +
-  "transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 " +
+  "inline-flex items-center justify-center gap-1 rounded-[4px] font-medium cursor-pointer " +
+  "transition-colors duration-150 select-none focus-visible:outline-none focus-visible:ring-2 " +
   "focus-visible:ring-focus-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed";
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 text-sm",
-  md: "h-10 px-4 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "h-6 min-w-[54px] px-1 text-[12px] leading-[18px]", // Medium/Caption (12px / 18px, 24px height)
+  md: "h-9 min-w-[82px] px-2 text-[14px] leading-[22px]", // Medium/Body (14px / 22px, 36px height)
+  lg: "h-10 min-w-[90px] px-2 text-[16px] leading-[24px]", // Medium/Subtitle (16px / 24px, 40px height)
 };
 
 const linkSizeStyles: Record<ButtonSize, string> = {
-  sm: "h-8 px-1 text-sm",
-  md: "h-10 px-1.5 text-sm",
-  lg: "h-12 px-2 text-base",
+  sm: "h-auto p-0 text-[12px] leading-[18px]",
+  md: "h-auto p-0 text-[14px] leading-[22px]",
+  lg: "h-auto p-0 text-[16px] leading-[24px]",
 };
 
 function getVariantStyles(variant: ButtonVariant, isDanger: boolean): string {
@@ -51,44 +51,59 @@ function getVariantStyles(variant: ButtonVariant, isDanger: boolean): string {
     switch (effectiveVariant) {
       case "primary":
         return (
-          "bg-danger text-primary-foreground hover:bg-danger-hover active:bg-danger-active " +
-          "disabled:bg-disabled-bg disabled:text-disabled-text"
+          "bg-danger text-white hover:bg-danger-hover active:bg-danger-active " +
+          "disabled:bg-[#ffccd2] disabled:text-white"
         );
       case "outline":
         return (
-          "bg-background text-danger border border-danger/40 hover:bg-danger-subtle hover:border-danger active:bg-danger-subtle/80 " +
-          "disabled:bg-disabled-bg disabled:text-disabled-text disabled:border-disabled-border"
+          "font-normal bg-background text-danger border border-danger hover:bg-background hover:text-danger-hover hover:border-danger-hover " +
+          "active:bg-background active:text-danger-active active:border-danger-active " +
+          "disabled:bg-background disabled:text-disabled-text disabled:border-disabled-border"
         );
       case "ghost":
-        return "bg-transparent text-danger hover:bg-danger-subtle active:bg-danger-subtle/80 disabled:text-disabled-text";
+        return (
+          "font-normal bg-transparent text-danger hover:bg-danger-subtle active:bg-danger-200 " +
+          "disabled:bg-transparent disabled:text-disabled-text"
+        );
       case "link":
-        return "bg-transparent text-danger hover:underline hover:text-danger-hover active:text-danger-active disabled:text-disabled-text disabled:no-underline";
+        return (
+          "font-normal bg-transparent text-danger hover:text-danger-hover active:text-danger-active " +
+          "disabled:text-[#ffccd2]"
+        );
     }
   }
 
   switch (effectiveVariant) {
     case "primary":
       return (
-        "bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active " +
-        "disabled:bg-disabled-bg disabled:text-disabled-text"
+        "bg-primary text-white hover:bg-primary-hover active:bg-primary-active " +
+        "disabled:bg-[#b0ebec] disabled:text-white"
       );
     case "outline":
       return (
-        "bg-background text-text border border-border hover:bg-surface hover:border-border-hover active:bg-disabled-bg/50 " +
-        "disabled:bg-disabled-bg disabled:text-disabled-text disabled:border-disabled-border"
+        "font-normal bg-background text-text border border-border hover:bg-background hover:text-primary hover:border-primary " +
+        "active:bg-background active:text-primary-active active:border-primary-active " +
+        "disabled:bg-background disabled:text-disabled-text disabled:border-disabled-border"
       );
     case "ghost":
-      return "bg-transparent text-text hover:bg-surface active:bg-disabled-bg/50 disabled:text-disabled-text";
+      return (
+        "font-normal bg-transparent text-text hover:bg-neutral-100 active:bg-neutral-200 " +
+        "disabled:bg-transparent disabled:text-disabled-text"
+      );
     case "link":
-      return "bg-transparent text-primary hover:underline hover:text-primary-hover active:text-primary-active disabled:text-disabled-text disabled:no-underline";
+      return (
+        "font-normal bg-transparent text-primary hover:text-primary-hover active:text-primary-active " +
+        "disabled:text-[#b0ebec]"
+      );
   }
 }
 
 /** Small inline spinner used for the `isLoading` state. */
-function Spinner() {
+function Spinner({ size }: { size?: ButtonSize }) {
+  const iconSizeClass = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
   return (
     <svg
-      className="h-4 w-4 animate-spin"
+      className={clsx(iconSizeClass, "animate-spin")}
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -154,7 +169,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...rest}
       >
-        {isLoading && <Spinner />}
+        {isLoading && <Spinner size={size} />}
         {!isLoading && leadingIcon}
         {children}
         {!isLoading && trailingIcon}

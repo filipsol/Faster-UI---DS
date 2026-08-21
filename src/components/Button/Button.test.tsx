@@ -13,7 +13,7 @@ describe("Button", () => {
     render(<Button>Default</Button>);
     const button = screen.getByRole("button", { name: "Default" });
     expect(button.className).toContain("bg-primary");
-    expect(button.className).toContain("h-10");
+    expect(button.className).toContain("h-9");
   });
 
   it.each(["primary", "outline", "ghost", "link", "secondary", "danger"] as const)(
@@ -55,9 +55,15 @@ describe("Button", () => {
     );
   });
 
-  it.each(["sm", "md", "lg"] as const)("applies the %s size styling", (size) => {
+  it.each([
+    ["sm", "h-6"],
+    ["md", "h-9"],
+    ["lg", "h-10"],
+  ] as const)("applies the %s size styling with class %s", (size, expectedClass) => {
     render(<Button size={size}>{size}</Button>);
-    expect(screen.getByRole("button", { name: size })).toBeInTheDocument();
+    const button = screen.getByRole("button", { name: size });
+    expect(button).toBeInTheDocument();
+    expect(button.className).toContain(expectedClass);
   });
 
   it("calls onClick when clicked", async () => {

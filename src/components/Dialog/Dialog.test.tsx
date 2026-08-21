@@ -216,21 +216,4 @@ describe("Dialog", () => {
     expect(screen.queryByRole("button", { name: "Cancel" })).not.toBeInTheDocument();
   });
 
-  it("renders centered alignment layout", () => {
-    render(
-      <Dialog
-        open
-        onClose={jest.fn()}
-        type="warning"
-        align="center"
-        title="Centered Alert"
-        description="Centered description"
-      >
-        Centered content
-      </Dialog>
-    );
-
-    expect(screen.getByText("Centered Alert")).toBeInTheDocument();
-    expect(screen.getByText("Centered description")).toBeInTheDocument();
-  });
 });
