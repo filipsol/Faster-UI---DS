@@ -193,6 +193,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       if (!isControlled) {
         setUncontrolledValue("");
       }
+
+      if (isControlled && innerInputRef.current) {
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          window.HTMLInputElement.prototype,
+          "value"
+        )?.set;
+
+        if (nativeInputValueSetter) {
+          nativeInputValueSetter.call(innerInputRef.current, "");
+        } else {
+          innerInputRef.current.value = "";
+        }
+
+        innerInputRef.current.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
       onClear?.();
     };
 
